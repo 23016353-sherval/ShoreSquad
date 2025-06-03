@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Rally your crew, track weather, and hit the next beach cleanup with our dope map app!">
+    <meta name="keywords" content="beach cleanup, environmental action, weather tracking, maps, social impact">
+    <meta name="author" content="ShoreSquad">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://shoresquad.com/">
+    <meta property="og:title" content="ShoreSquad - Rally Your Crew for Beach Cleanups">
+    <meta property="og:description" content="Rally your crew, track weather, and hit the next beach cleanup with our dope map app!">
+    <meta property="og:image" content="/assets/og-image.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://shoresquad.com/">
+    <meta property="twitter:title" content="ShoreSquad - Rally Your Crew for Beach Cleanups">
+    <meta property="twitter:description" content="Rally your crew, track weather, and hit the next beach cleanup with our dope map app!">
+    <meta property="twitter:image" content="/assets/twitter-image.jpg">
+
+    <title>ShoreSquad - Rally Your Crew for Beach Cleanups</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Navigation -->
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="#" class="logo" aria-label="ShoreSquad Home">
+                    <i class="fas fa-waves" aria-hidden="true"></i>
+                    <span>ShoreSquad</span>
+                </a>
+            </div>
+            
+            <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <div class="nav-menu">
+                <ul class="nav-list">
+                    <li><a href="#home" class="nav-link">Home</a></li>
+                    <li><a href="#features" class="nav-link">Features</a></li>
+                    <li><a href="#events" class="nav-link">Events</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button class="btn btn-secondary">Log In</button>
+                    <button class="btn btn-primary">Join Squad</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section id="home" class="hero" role="banner">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <h1 class="hero-title">
+                        Rally Your <span class="highlight">Crew</span>,<br>
+                        Clean Our <span class="highlight">Shores</span>
+                    </h1>
+                    <p class="hero-subtitle">
+                        Track weather, find beach cleanups, and make eco-action fun with your squad. 
+                        Join the movement that's making waves! 🌊
+                    </p>
+                    <div class="hero-actions">
+                        <button class="btn btn-primary btn-large">
+                            <i class="fas fa-rocket" aria-hidden="true"></i>
+                            Start Your Squad
+                        </button>
+                        <button class="btn btn-outline btn-large">
+                            <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                            Find Events
+                        </button>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <span class="stat-number">500+</span>
+                            <span class="stat-label">Beach Cleanups</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">2.5K</span>
+                            <span class="stat-label">Squad Members</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">50K</span>
+                            <span class="stat-label">Pounds Collected</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="hero-image">
+                        <div class="floating-card weather-card">
+                            <i class="fas fa-sun"></i>
+                            <span>Perfect cleanup weather!</span>
+                        </div>
+                        <div class="floating-card map-card">
+                            <i class="fas fa-map-pin"></i>
+                            <span>5 events near you</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-wave">
+                <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+                    <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" class="shape-fill"></path>
+                    <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" class="shape-fill"></path>
+                    <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" class="shape-fill"></path>
+                </svg>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="features">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Why ShoreSquad Rocks</h2>
+                    <p class="section-subtitle">Everything you need to organize epic beach cleanups with your crew</p>
+                </div>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-cloud-sun" aria-hidden="true"></i>
+                        </div>
+                        <h3 class="feature-title">Weather Tracking</h3>
+                        <p class="feature-description">
+                            Never get caught in the rain! Real-time weather updates help you plan the perfect cleanup day.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-map-marked-alt" aria-hidden="true"></i>
+                        </div>
+                        <h3 class="feature-title">Interactive Maps</h3>
+                        <p class="feature-description">
+                            Find beaches near you, discover cleanup hotspots, and navigate like a pro with our smart maps.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-users" aria-hidden="true"></i>
+                        </div>
+                        <h3 class="feature-title">Squad Building</h3>
+                        <p class="feature-description">
+                            Rally your friends, meet new eco-warriors, and build the ultimate cleanup crew.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-calendar-check" aria-hidden="true"></i>
+                        </div>
+                        <h3 class="feature-title">Event Planning</h3>
+                        <p class="feature-description">
+                            Create, join, and manage cleanup events with ease. Never miss a chance to make a difference.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-trophy" aria-hidden="true"></i>
+                        </div>
+                        <h3 class="feature-title">Impact Tracking</h3>
+                        <p class="feature-description">
+                            See your environmental impact grow! Track trash collected, beaches cleaned, and lives changed.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-share-alt" aria-hidden="true"></i>
+                        </div>
+                        <h3 class="feature-title">Social Sharing</h3>
+                        <p class="feature-description">
+                            Spread the word! Share your cleanup victories and inspire others to join the movement.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Events Section -->
+        <section id="events" class="events">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Upcoming Cleanups</h2>
+                    <p class="section-subtitle">Join these amazing events happening near you</p>
+                </div>
+                
+                <div class="events-grid">
+                    <article class="event-card">
+                        <div class="event-image">
+                            <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&h=200&fit=crop" alt="Santa Monica Beach cleanup event" loading="lazy">
+                            <div class="event-date">
+                                <span class="day">15</span>
+                                <span class="month">Jun</span>
+                            </div>
+                        </div>
+                        <div class="event-content">
+                            <h3 class="event-title">Santa Monica Beach Cleanup</h3>
+                            <div class="event-meta">
+                                <span class="event-location">
+                                    <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                                    Santa Monica, CA
+                                </span>
+                                <span class="event-time">
+                                    <i class="fas fa-clock" aria-hidden="true"></i>
+                                    9:00 AM - 12:00 PM
+                                </span>
+                            </div>
+                            <p class="event-description">
+                                Join us for a morning of beach cleaning and ocean conservation. All supplies provided!
+                            </p>
+                            <div class="event-footer">
+                                <div class="event-attendees">
+                                    <span class="attendee-count">24 going</span>
+                                </div>
+                                <button class="btn btn-primary btn-small">Join Event</button>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <article class="event-card">
+                        <div class="event-image">
+                            <img src="https://images.unsplash.com/photo-1583212292454-1fe6229603b7?w=400&h=200&fit=crop" alt="Malibu Sunset Cleanup event" loading="lazy">
+                            <div class="event-date">
+                                <span class="day">22</span>
+                                <span class="month">Jun</span>
+                            </div>
+                        </div>
+                        <div class="event-content">
+                            <h3 class="event-title">Malibu Sunset Cleanup</h3>
+                            <div class="event-meta">
+                                <span class="event-location">
+                                    <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                                    Malibu, CA
+                                </span>
+                                <span class="event-time">
+                                    <i class="fas fa-clock" aria-hidden="true"></i>
+                                    5:00 PM - 8:00 PM
+                                </span>
+                            </div>
+                            <p class="event-description">
+                                Clean the beach as the sun sets! Perfect for those epic golden hour photos.
+                            </p>
+                            <div class="event-footer">
+                                <div class="event-attendees">
+                                    <span class="attendee-count">18 going</span>
+                                </div>
+                                <button class="btn btn-primary btn-small">Join Event</button>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <article class="event-card">
+                        <div class="event-image">
+                            <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=200&fit=crop" alt="Venice Beach Squad Meetup event" loading="lazy">
+                            <div class="event-date">
+                                <span class="day">29</span>
+                                <span class="month">Jun</span>
+                            </div>
+                        </div>
+                        <div class="event-content">
+                            <h3 class="event-title">Venice Beach Squad Meetup</h3>
+                            <div class="event-meta">
+                                <span class="event-location">
+                                    <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                                    Venice, CA
+                                </span>
+                                <span class="event-time">
+                                    <i class="fas fa-clock" aria-hidden="true"></i>
+                                    10:00 AM - 1:00 PM
+                                </span>
+                            </div>
+                            <p class="event-description">
+                                Monthly squad meetup with beach cleanup, games, and good vibes. New members welcome!
+                            </p>
+                            <div class="event-footer">
+                                <div class="event-attendees">
+                                    <span class="attendee-count">42 going</span>
+                                </div>
+                                <button class="btn btn-primary btn-small">Join Event</button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                
+                <div class="events-cta">
+                    <button class="btn btn-outline">View All Events</button>
+                    <button class="btn btn-primary">Create Event</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta">
+            <div class="container">
+                <div class="cta-content">
+                    <h2 class="cta-title">Ready to Make Waves?</h2>
+                    <p class="cta-subtitle">Join thousands of eco-warriors making a real difference, one beach at a time.</p>
+                    <div class="cta-actions">
+                        <button class="btn btn-primary btn-large">
+                            <i class="fas fa-rocket" aria-hidden="true"></i>
+                            Start Your Journey
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <a href="#" class="logo">
+                            <i class="fas fa-waves" aria-hidden="true"></i>
+                            <span>ShoreSquad</span>
+                        </a>
+                        <p>Rallying crews to clean beaches and protect our oceans, one cleanup at a time.</p>
+                        <div class="social-links">
+                            <a href="#" aria-label="Follow us on Instagram" class="social-link">
+                                <i class="fab fa-instagram" aria-hidden="true"></i>
+                            </a>
+                            <a href="#" aria-label="Follow us on Twitter" class="social-link">
+                                <i class="fab fa-twitter" aria-hidden="true"></i>
+                            </a>
+                            <a href="#" aria-label="Follow us on TikTok" class="social-link">
+                                <i class="fab fa-tiktok" aria-hidden="true"></i>
+                            </a>
+                            <a href="#" aria-label="Follow us on Facebook" class="social-link">
+                                <i class="fab fa-facebook" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#events">Events</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 class="footer-title">Community</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Join Squad</a></li>
+                        <li><a href="#">Create Event</a></li>
+                        <li><a href="#">Squad Leaders</a></li>
+                        <li><a href="#">Success Stories</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 class="footer-title">Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Contact Support</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 ShoreSquad. All rights reserved. Made with 💙 for our oceans.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Loading spinner for JavaScript actions -->
+    <div id="loading-spinner" class="loading-spinner" aria-hidden="true">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/app.js"></script>
+</body>
+</html>
