@@ -228,10 +228,11 @@ class WeatherService {
   constructor() {
     this.cache = new Map();
     this.cacheTimeout = 10 * 60 * 1000; // 10 minutes
+    this.baseUrl = 'https://api.data.gov.sg/v1/environment';
   }
 
   async getWeather(lat, lng) {
-    const cacheKey = `${lat},${lng}`;
+    const cacheKey = `current_${lat}_${lng}`;
     const cached = this.cache.get(cacheKey);
     
     if (cached && Date.now() - cached.timestamp < this.cacheTimeout) {
@@ -239,33 +240,173 @@ class WeatherService {
     }
 
     try {
-      // Mock weather data for demo purposes
-      // Replace with actual weather API call
-      const mockWeather = this.getMockWeather();
+      // Get real-time temperature from NEA API
+      const tempResponse = await fetch(`${this.baseUrl}/air-temperature`);
+      const tempData = await tempResponse.json();
+      
+      // Get 24-hour forecast from NEA API
+      const forecastResponse = await fetch(`${this.baseUrl}/24-hour-weather-forecast`);
+      const forecastData = await forecastResponse.json();
+      
+      const weather = this.processCurrentWeather(tempData, forecastData);
       
       this.cache.set(cacheKey, {
-        data: mockWeather,
+        data: weather,
         timestamp: Date.now()
       });
       
-      return mockWeather;
+      return weather;
     } catch (error) {
       console.error('Weather service error:', error);
       return this.getMockWeather(); // Fallback to mock data
     }
   }
 
-  getMockWeather() {
-    const conditions = ['sunny', 'partly-cloudy', 'cloudy', 'rainy'];
-    const condition = conditions[Math.floor(Math.random() * conditions.length)];
+  async get4DayForecast() {
+    const cacheKey = '4day_forecast';
+    const cached = this.cache.get(cacheKey);
+    
+    if (cached && Date.now() - cached.timestamp < this.cacheTimeout) {
+      return cached.data;
+    }
+
+    try {
+      const response = await fetch(`${this.baseUrl}/4-day-weather-forecast`);
+      const data = await response.json();
+      
+      const forecast = this.process4DayForecast(data);
+      
+      this.cache.set(cacheKey, {
+        data: forecast,
+        timestamp: Date.now()
+      });
+      
+      return forecast;
+    } catch (error) {
+      console.error('4-day forecast error:', error);
+      return this.getMock4DayForecast();
+    }
+  }
+
+  processCurrentWeather(tempData, forecastData) {
+    // Get average temperature from multiple stations
+    let totalTemp = 0;
+    let stationCount = 0;
+    
+    if (tempData.items && tempData.items[0] && tempData.items[0].readings) {
+      tempData.items[0].readings.forEach(reading => {
+        if (reading.value) {
+          totalTemp += reading.value;
+          stationCount++;
+        }
+      });
+    }
+    
+    const avgTemp = stationCount > 0 ? Math.round(totalTemp / stationCount) : 28;
+    
+    // Get current forecast from 24-hour data
+    let condition = 'Partly Cloudy';
+    let humidity = { low: 60, high: 85 };
+    let wind = { direction: 'Variable', speed: 'Light' };
+    
+    if (forecastData.items && forecastData.items[0]) {
+      const general = forecastData.items[0].general;
+      if (general) {
+        condition = general.forecast || condition;
+        humidity = general.relative_humidity || humidity;
+        
+        if (general.temperature) {
+          // Use forecast temp range if available
+        }
+      }
+    }
     
     return {
-      temperature: Math.floor(Math.random() * 20) + 65, // 65-85°F
+      temperature: avgTemp,
       condition: condition,
-      windSpeed: Math.floor(Math.random() * 15) + 5, // 5-20 mph
-      humidity: Math.floor(Math.random() * 40) + 40, // 40-80%
-      cleanupFriendly: condition !== 'rainy'
+      humidity: humidity,
+      wind: wind,
+      cleanupFriendly: !condition.toLowerCase().includes('thundery') && 
+                      !condition.toLowerCase().includes('heavy')
     };
+  }
+
+  process4DayForecast(data) {
+    if (!data.items || !data.items[0] || !data.items[0].forecasts) {
+      return this.getMock4DayForecast();
+    }
+
+    return data.items[0].forecasts.map(forecast => ({
+      date: forecast.date,
+      day: this.getDayName(forecast.date),
+      condition: forecast.forecast,
+      temperature: {
+        low: forecast.temperature.low,
+        high: forecast.temperature.high
+      },
+      humidity: forecast.relative_humidity,
+      wind: forecast.wind,
+      icon: this.getWeatherIcon(forecast.forecast),
+      cleanupFriendly: !forecast.forecast.toLowerCase().includes('thundery') && 
+                      !forecast.forecast.toLowerCase().includes('heavy')
+    }));
+  }
+
+  getDayName(dateString) {
+    const date = new Date(dateString);
+    const today = new Date();
+    const tomorrow = new Date(today.getTime() + 24 * 60 * 60 * 1000);
+    
+    if (date.toDateString() === today.toDateString()) {
+      return 'Today';
+    } else if (date.toDateString() === tomorrow.toDateString()) {
+      return 'Tomorrow';
+    } else {
+      return date.toLocaleDateString('en-US', { weekday: 'long' });
+    }
+  }
+
+  getWeatherIcon(condition) {
+    const lowerCondition = condition.toLowerCase();
+    
+    if (lowerCondition.includes('thunder')) {
+      return 'fas fa-cloud-bolt';
+    } else if (lowerCondition.includes('showers') || lowerCondition.includes('rain')) {
+      return 'fas fa-cloud-rain';
+    } else if (lowerCondition.includes('cloudy')) {
+      return 'fas fa-cloud';
+    } else if (lowerCondition.includes('fair') || lowerCondition.includes('sunny')) {
+      return 'fas fa-sun';
+    } else {
+      return 'fas fa-cloud-sun';
+    }
+  }
+
+  getMockWeather() {
+    return {
+      temperature: 28,
+      condition: 'Partly Cloudy',
+      humidity: { low: 60, high: 85 },
+      wind: { direction: 'SW', speed: 'Light' },
+      cleanupFriendly: true
+    };
+  }
+
+  getMock4DayForecast() {
+    const today = new Date();
+    return Array.from({ length: 4 }, (_, i) => {
+      const date = new Date(today.getTime() + (i + 1) * 24 * 60 * 60 * 1000);
+      return {
+        date: date.toISOString().split('T')[0],
+        day: this.getDayName(date.toISOString().split('T')[0]),
+        condition: 'Partly Cloudy',
+        temperature: { low: 24, high: 32 },
+        humidity: { low: 60, high: 85 },
+        wind: { direction: 'SW', speed: 'Light' },
+        icon: 'fas fa-cloud-sun',
+        cleanupFriendly: true
+      };
+    });
   }
 }
 
@@ -756,16 +897,16 @@ class ShoreSquadApp {
       });
     });
   }
-
   async loadInitialData() {
     try {
-      // Load weather data for default location
-      const weather = await this.weatherService.getWeather(
-        CONFIG.DEFAULT_LOCATION.lat,
-        CONFIG.DEFAULT_LOCATION.lng
-      );
+      // Load weather data for Singapore (since we're using NEA API)
+      const weather = await this.weatherService.getWeather(1.3521, 103.8198); // Singapore coordinates
       
       this.updateWeatherDisplay(weather);
+      
+      // Load 4-day forecast
+      const forecast = await this.weatherService.get4DayForecast();
+      this.createWeatherForecastSection(forecast);
       
       // Update event join buttons with event IDs
       this.updateEventButtons();
@@ -773,13 +914,107 @@ class ShoreSquadApp {
     } catch (error) {
       console.error('Error loading initial data:', error);
     }
-  }
-
-  updateWeatherDisplay(weather) {
+  }  updateWeatherDisplay(weather) {
     const weatherCard = document.querySelector('.weather-card span');
     if (weatherCard && weather.cleanupFriendly) {
-      weatherCard.textContent = `${weather.temperature}°F - Perfect cleanup weather!`;
+      weatherCard.textContent = `${weather.temperature}°C - Perfect cleanup weather!`;
     }
+  }
+
+  createWeatherForecastSection(forecast) {
+    // Find the next cleanup section to insert weather forecast before it
+    const nextCleanupSection = document.getElementById('next-cleanup');
+    if (!nextCleanupSection) return;
+
+    // Check if weather forecast already exists
+    let weatherSection = document.getElementById('weather-forecast');
+    if (weatherSection) {
+      weatherSection.remove();
+    }
+
+    // Create weather forecast section
+    weatherSection = document.createElement('section');
+    weatherSection.id = 'weather-forecast';
+    weatherSection.className = 'weather-forecast';
+    
+    weatherSection.innerHTML = `
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">4-Day Weather Forecast</h2>
+          <p class="section-subtitle">Plan your beach cleanup activities with Singapore's weather forecast</p>
+        </div>
+        
+        <div class="forecast-grid">
+          ${forecast.map(day => `
+            <div class="forecast-card ${day.cleanupFriendly ? 'cleanup-friendly' : 'cleanup-warning'}">
+              <div class="forecast-day">
+                <h3>${day.day}</h3>
+                <p class="forecast-date">${this.formatDate(day.date)}</p>
+              </div>
+              
+              <div class="forecast-icon">
+                <i class="${day.icon}" aria-hidden="true"></i>
+              </div>
+              
+              <div class="forecast-temp">
+                <span class="temp-high">${day.temperature.high}°</span>
+                <span class="temp-low">${day.temperature.low}°</span>
+              </div>
+              
+              <div class="forecast-condition">
+                <p>${day.condition}</p>
+              </div>
+              
+              <div class="forecast-details">
+                <div class="detail">
+                  <i class="fas fa-tint" aria-hidden="true"></i>
+                  <span>${day.humidity.low}-${day.humidity.high}%</span>
+                </div>
+                <div class="detail">
+                  <i class="fas fa-wind" aria-hidden="true"></i>
+                  <span>${day.wind.direction}</span>
+                </div>
+              </div>
+              
+              <div class="cleanup-indicator">
+                ${day.cleanupFriendly ? 
+                  '<i class="fas fa-check-circle"></i><span>Good for cleanup</span>' : 
+                  '<i class="fas fa-exclamation-triangle"></i><span>Check conditions</span>'
+                }
+              </div>
+            </div>
+          `).join('')}
+        </div>
+        
+        <div class="weather-source">
+          <p><i class="fas fa-info-circle"></i> Weather data provided by Singapore's National Environment Agency (NEA)</p>
+        </div>
+      </div>
+    `;
+
+    // Insert before next cleanup section
+    nextCleanupSection.parentNode.insertBefore(weatherSection, nextCleanupSection);
+    
+    // Add animation to new elements
+    const forecastCards = weatherSection.querySelectorAll('.forecast-card');
+    forecastCards.forEach(card => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(30px)';
+      card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    });
+    
+    // Trigger animation after a small delay
+    setTimeout(() => {
+      forecastCards.forEach(card => {
+        card.style.opacity = '1';
+        card.style.transform = 'translateY(0)';
+      });
+    }, 100);
+  }
+
+  formatDate(dateString) {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
   }
 
   updateEventButtons() {
