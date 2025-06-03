@@ -16,13 +16,15 @@ ShoreSquad creates value by mobilizing young people to clean beaches, using weat
 ## 🎨 Design Principles
 
 ### Color Palette
+
 - **Ocean Blue** (#0077BE) - Trust, reliability, ocean connection
-- **Coral** (#FF6B6B) - Energy, youthful enthusiasm  
+- **Coral** (#FF6B6B) - Energy, youthful enthusiasm
 - **Seafoam Green** (#20B2AA) - Environmental consciousness
 - **Sandy Beige** (#F5E6A8) - Warmth, beach vibes
 - **Deep Navy** (#1B365D) - Stability, depth
 
 ### UX Focus
+
 - Mobile-first responsive design
 - High contrast for accessibility
 - Intuitive navigation with clear CTAs
@@ -32,6 +34,7 @@ ShoreSquad creates value by mobilizing young people to clean beaches, using weat
 ## 🚀 Getting Started
 
 ### Prerequisites
+
 - Modern web browser (Chrome, Firefox, Safari, Edge)
 - [Live Server extension](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) for VS Code (recommended)
 
@@ -44,7 +47,9 @@ ShoreSquad creates value by mobilizing young people to clean beaches, using weat
 5. **Visit** `http://localhost:3000` in your browser
 
 ### Alternative Setup
+
 If you prefer not to use Live Server:
+
 1. Simply open `index.html` in your web browser
 2. Navigate through the local file path
 
@@ -66,16 +71,19 @@ ShoreSquad/
 ## 🛠️ Technology Stack
 
 ### Frontend
+
 - **HTML5**: Semantic markup with accessibility features
 - **CSS3**: Modern styling with CSS Grid, Flexbox, and custom properties
 - **Vanilla JavaScript (ES6+)**: Clean, modern JavaScript without dependencies
 
 ### Tools & Libraries
+
 - **Font Awesome**: Icons and graphics
 - **Google Fonts**: Inter & Poppins typography
 - **Unsplash**: High-quality placeholder images
 
 ### Development
+
 - **VS Code**: Recommended IDE
 - **Live Server**: Local development server
 - **Git**: Version control
@@ -83,24 +91,28 @@ ShoreSquad/
 ## 🌟 Key Features Implemented
 
 ### Navigation
+
 - Responsive mobile menu
 - Smooth scrolling navigation
 - Fixed header with scroll effects
 - Keyboard accessibility
 
 ### Interactive Elements
+
 - Animated feature cards
 - Event management system
 - Weather integration (mock data)
 - Form validation and handling
 
 ### Performance
+
 - Optimized images and assets
 - Debounced scroll events
 - Intersection Observer for animations
 - Efficient CSS with custom properties
 
 ### Accessibility
+
 - Screen reader support
 - Keyboard navigation
 - High contrast mode support
@@ -109,6 +121,7 @@ ShoreSquad/
 ## 🎯 Future Enhancements
 
 ### Phase 2
+
 - [ ] Real weather API integration
 - [ ] Google Maps integration
 - [ ] User authentication system
@@ -116,6 +129,7 @@ ShoreSquad/
 - [ ] Database for events and users
 
 ### Phase 3
+
 - [ ] Mobile app (React Native/Flutter)
 - [ ] Push notifications
 - [ ] Social media integration
@@ -133,6 +147,7 @@ We welcome contributions! Here's how you can help:
 5. **Open** a Pull Request
 
 ### Development Guidelines
+
 - Follow existing code style and conventions
 - Write descriptive commit messages
 - Test your changes across different browsers
@@ -167,4 +182,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Made with 💙 for our oceans** 🌊
 
-*Let's rally our crews and make waves for a cleaner planet!*
+_Let's rally our crews and make waves for a cleaner planet!_
